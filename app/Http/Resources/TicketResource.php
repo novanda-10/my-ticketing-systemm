@@ -32,8 +32,12 @@ class TicketResource extends JsonResource
                 'links' =>[
                     'self' => 'todo'
                 ]
-            ]
-            ,
+            ],
+                        
+            'includes' =>[
+                new UserResource($this->user),
+            ],
+            
             'links' => [
 
                 'self' => route('tickets.show' , ['ticket' =>$this->id])
