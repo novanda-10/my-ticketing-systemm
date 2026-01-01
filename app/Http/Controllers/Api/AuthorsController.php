@@ -8,7 +8,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 
-class UserController extends Controller
+class AuthorsController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -31,9 +31,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $author)
     {
-        return new UserResource($user);
+        return new UserResource($author);
     }
 
 
