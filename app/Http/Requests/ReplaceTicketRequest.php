@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTicketRequest extends FormRequest
+class ReplaceTicketRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,9 @@ class StoreTicketRequest extends FormRequest
             'data.attributes.title' => 'required|string',
             'data.attributes.description' => 'required|string',
             'data.attributes.status' => 'required|string|in:A,C,X,H',
-
+            'data.relationships.author.data.id' => 'required|integer',
         ];
-// beacus if we are creating via author we dont need author id
-        if($this->routeIs('tickets.store')){
-            $rules['data.relationships.author.data.id'] = 'required|integer';
-        }
+
 
         return $rules;
     }
