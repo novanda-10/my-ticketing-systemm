@@ -29,7 +29,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
 
         //api/tickets/{id}
-    Route::apiResource('tickets' , TicketController::class)->except('update');
+    Route::apiResource('tickets' , TicketController::class)->except(['update']);
     Route::put('tickets/{ticket}' , [TicketController::class, 'replace']);
     Route::patch('tickets/{ticket}' , [TicketController::class, 'update']);
 
@@ -37,11 +37,11 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('authors' , AuthorsController::class);
 
 
-    Route::apiResource('authors.tickets' , AuthorTicketsController::class)->except('update');
+    Route::apiResource('authors.tickets' , AuthorTicketsController::class)->except(['update']);
 
     Route::put('authors/{author}/tickets/{ticket}' , [AuthorTicketsController::class, 'replace']);
     
-    Route::patch('tickets/{ticket}' , [AuthorTicketsController::class, 'update']);
+     Route::patch('authors/{author}/tickets/{ticket}' , [AuthorTicketsController::class, 'update']);
 
 
     Route::post('/logout' , [AuthController::class , 'logout']);
