@@ -9,12 +9,15 @@ use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Http\Resources\TicketResource;
 use App\Models\User;
+use App\Policies\TicketPolicy;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use function Laravel\Prompts\error;
 
 class TicketController extends ApiController
 {
+    protected $policyClass = TicketPolicy::class;
     /**
      * Display a listing of the resource.
      */
@@ -73,7 +76,12 @@ class TicketController extends ApiController
             $ticket = Ticket::findOrFail($ticket_id);
 
 
-            
+            //policy
+        //$this->authorize('update' , [$ticket , TicketPolicy::class]);
+        //this two lines work the same just handeld TicketPolicy::class or UserPolicy::class in ApiController
+            $this->isAble('update' , $ticket);
+
+
             $ticket->update($request->mappedAttributes());
     
             return new TicketResource($ticket);
@@ -83,6 +91,8 @@ class TicketController extends ApiController
 
         } catch (ModelNotFoundException $exeption) {
             return $this->error("ticket not found" , 404);
+        } catch(AuthorizationException $ex){
+            return $this->error('you are not authorize to update that resource',401);
         }
     }
 
