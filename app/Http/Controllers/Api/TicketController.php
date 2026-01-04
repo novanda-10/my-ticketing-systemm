@@ -37,7 +37,8 @@ class TicketController extends ApiController
             $user = User::findOrFail($request->input('data.relationships.author.data.id'));
 
 
-            $this->isAble('store' , null);
+            $this->isAble('store', Ticket::class);
+           // $this->isAble('store' , Ticket::class);
 
         } catch (ModelNotFoundException $exeption) {
           return   $this->ok('user not found',[
