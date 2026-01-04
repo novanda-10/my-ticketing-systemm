@@ -44,6 +44,7 @@ class TicketPolicy
 
     public function update(User $user , Ticket $ticket){
         if($user->tokenCan(Abilities::ReplaceTicket)){
+            //dd(Abilities::ReplaceTicket);
             return true;
         }  
         return false;
