@@ -44,7 +44,8 @@ class TicketController extends ApiController
           return   $this->ok('user not found',[
                 'error' => 'the provided user id does not exists'
             ]);
-        }
+        } catch (AuthorizationException $exeption) {
+            return $this->error('you are not authorize to update that resource',401);}
 
 
 
@@ -121,6 +122,8 @@ class TicketController extends ApiController
 
         } catch (ModelNotFoundException $exeption) {
             return $this->error("ticket not found" , 404);
+        } catch(AuthorizationException $ex){
+            return $this->error('you are not authorize to replace that resource',401);
         }
 
 
