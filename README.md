@@ -83,4 +83,52 @@ Normal Users 👤 can only manage their own tickets:
 ticket:Own:create, ticket:Own:update, ticket:Own:delete
 Policies (TicketPolicy, UserPolicy) check token abilities and ownership for authorization.
 
+## 📝 Request Validation
+
+All API requests are validated using Laravel FormRequest classes to ensure data is correct before reaching controllers.
+
+LoginUserRequest / ApiLoginRequest 🔑 – Validates login credentials (email and password).
+
+BaseUserRequest & BaseTicketRequest 👤🎫 – Base classes that map JSON API fields to database columns.
+
+Store / Update / Replace Requests 🆕✏️ – Handle validation for creating, updating, or replacing users and tickets:
+
+StoreUserRequest / StoreTicketRequest → required fields for creation
+
+UpdateUserRequest / UpdateTicketRequest → optional fields for partial updates
+
+ReplaceUserRequest / ReplaceTicketRequest → required fields for full replacement
+
+✅ Ensures consistent, clean data and automatic error responses on invalid input.
+
+## 📦 API Resources
+
+Laravel Resource classes are used to transform models into standardized JSON responses for the API.
+
+TicketResource 🎫
+
+Transforms a Ticket model into a structured JSON object.
+
+Includes:
+
+attributes (title, description, status, timestamps)
+
+relationships (author info)
+
+includes (embedded user data)
+
+links (self-link to the ticket)
+
+UserResource 👤
+
+Transforms a User model into a structured JSON object.
+
+Includes:
+
+attributes (name, email, role, timestamps)
+
+includes (all tickets of the user using TicketResource)
+
+links (self-link to the author)
+
 ✅ Perfect for learning: RESTful APIs, Policies, Sanctum Tokens, and JSON:API style responses in Laravel.
