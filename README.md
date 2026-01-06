@@ -61,10 +61,15 @@ Tokens have abilities defined in App\Permissions\Abilities
 ## 📝 Authors & Author Tickets
 
 GET /api/authors – List all authors
+
 GET /api/authors/{id} – Show author details
+
 GET /api/authors/{author}/tickets – List tickets for specific author
+
 POST /api/authors/{author}/tickets – Create ticket for an author
+
 PATCH/PUT /api/authors/{author}/tickets/{ticket} – Update/replace ticket
+
 DELETE /api/authors/{author}/tickets/{ticket} – Delete ticket
 
 ## 🛡️ Authorization & Abilities
